@@ -1,12 +1,13 @@
 <template>
     <div>
         <div>
-            <div v-for="(item, index) in tableData" :key="index" class="table-row">
-                <div>{{ item.mame }}</div>
+            <div v-for="(item, index) in samples" :key="index" class="tableRow">
+                <div>{{ item.name }}</div>
                 <div>{{ item.monnig_number }}</div>
                 <div>{{ item.country }}</div>
                 <div>{{ item.sample_class }}</div>
                 <div>{{ item.group }}</div>
+                <div>{{ item.date_found_year }}</div>
                 <div>{{ item.sample_weight_g }}</div>
             </div>
         </div>
@@ -15,6 +16,7 @@
 
 <script>
     import axios from 'axios';
+    import { isProxy, toRaw } from 'vue';
 
     export default{
         data(){
@@ -28,9 +30,9 @@
         methods: {
             async fetchData(){
                 try{
-                    const response = axios.get('http://localhost:8080/api/samples');
+                    const response = await axios.get('http://localhost:8080/api/samples/all');
                     this.samples = response.data;
-                    console.log(samples);
+                    this.samples = this.samples.data;
                 }catch(error){
                     console.error('Error fetching data:', error);
                 }
