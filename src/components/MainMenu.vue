@@ -48,10 +48,6 @@
 
 <script setup>
     import ContentTable from './ContentTable.vue';
-
-    components: {
-        ContentTable
-    }
 </script>
 
 <style scoped>

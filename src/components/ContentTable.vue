@@ -28,8 +28,9 @@
         methods: {
             async fetchData(){
                 try{
-                    const response = axios.get('localhost:8080/api/samples');
+                    const response = axios.get('http://localhost:8080/api/samples');
                     this.samples = response.data;
+                    console.log(samples);
                 }catch(error){
                     console.error('Error fetching data:', error);
                 }
