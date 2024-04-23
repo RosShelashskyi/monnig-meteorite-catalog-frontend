@@ -28,7 +28,7 @@
                         <div class="tableTopElement">Weight</div>
                     </div>
                     <div class="tableContent">
-                        Seach results will be displayed here as a table (implemented as a separate component)
+                        <ContentTable/>
                     </div>
                     <div class="tableBottom">
                         <div>Results</div>
@@ -47,7 +47,11 @@
 </template>
 
 <script setup>
+    import ContentTable from './ContentTable.vue';
 
+    components: {
+        ContentTable
+    }
 </script>
 
 <style scoped>
