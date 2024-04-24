@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .mainWindow{
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+    
+        .top{
+            display: flex;
+            flex-direction: row;
+        }
+
+        .title{
+            color: #4D1979;
+            font-weight: bold;
+            font-size: x-large;
+            margin-top: 1%;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        .logo{
+            width: 70px;
+        }
+
+        .bottom{
+            height: 100%;
+        }
+
+        .contentWindow{
+            margin-top: 10%;
+            margin-left: 15%;
+            margin-right: 15%;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .entry{
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="mainWindow">
+        <div class = "top">
+            <img src="../assets/TCU.jpg" class="logo">
+            <div class="title">Monnig Meteorite Catalog</div>
+        </div>
+        <div class="bottom">
+            <div class="contentWindow"> 
+                Sample details:
+                <div class="entry">
+                    <div>Name:</div>
+                    <div>{{}}</div>
+                </div>
+                <div class="entry">
+                    <div>Monnig number: </div>
+                    <div>{{}}</div>
+                </div>
+                <div class="entry">
+                    <div>Stuff</div>
+                    <div>Stuff</div>
+                </div>
+                <div class="entry">
+                    <div>Stuff</div>
+                    <div>Stuff</div>
+                </div>
+                <div class="entry">
+                    <div>Stuff</div>
+                    <div>Stuff</div>
+                </div>
+                <div class="entry">
+                    <div>Stuff</div>
+                    <div>Stuff</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
