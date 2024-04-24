@@ -1,15 +1,15 @@
 <script setup>
-import MainMenu from './components/MainMenu.vue'
 </script>
 
 <template>
   <div>
-    <MainMenu/>
+    <RouterView></RouterView>
+    
   </div>
 </template>
 
 
 
 <style scoped>
-
+  
 </style>
