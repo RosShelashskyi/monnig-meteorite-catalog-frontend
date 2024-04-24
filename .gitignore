@@ -31,3 +31,4 @@ coverage
 
 .vscode
 README.md
+src/components/*.html

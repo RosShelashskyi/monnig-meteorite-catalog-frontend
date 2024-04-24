@@ -16,7 +16,6 @@
 
 <script>
     import axios from 'axios';
-    import { isProxy, toRaw } from 'vue';
 
     export default{
         data(){

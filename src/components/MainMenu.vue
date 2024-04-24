@@ -9,7 +9,7 @@
         <div class="bottom">
             <div class="contentWindow"> 
                 <div class="buttons">
-                    <div class="add">Add</div>
+                    <button @click="$emit('add-clicked')" class="add">Add</button>
                     <form action="" class="searchBar">
                         <input type="text" placeholder="Search" name="q">
                         <button type="submit">
