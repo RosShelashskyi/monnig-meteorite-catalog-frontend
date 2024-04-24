@@ -28,7 +28,7 @@
                     <input class="yearIn" type="text" id="year" v-model="sampleData.date_found_year">
                     <br>
                     <label for="weight">Sample weight:</label>
-                    <input class="weightIn" type="number" id="weight" v-model="sampleData.date_found_year">
+                    <input class="weightIn" type="text" id="weight" v-model="sampleData.sample_weight_g">
                     <br>
                     <button @click="goToHome">Cancel submission</button>
                     <button class="addButton" type="submit">Add</button>

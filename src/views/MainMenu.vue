@@ -54,6 +54,9 @@
             goToAdd(){
                 this.$router.push('/add');
             }
+        },
+        components:{
+            ContentTable
         }        
     }
 </script>
