@@ -9,7 +9,7 @@
         <div class="bottom">
             <div class="contentWindow"> 
                 <div class="buttons">
-                    <button @click="$emit('add-clicked')" class="add">Add</button>
+                    <button @click="goToAdd" class="add">Add</button>
                     <form action="" class="searchBar">
                         <input type="text" placeholder="Search" name="q">
                         <button type="submit">
@@ -46,8 +46,16 @@
     </div>
 </template>
 
-<script setup>
-    import ContentTable from './ContentTable.vue';
+<script>
+    import ContentTable from '@/components/ContentTable.vue';
+
+    export default{
+        methods:{
+            goToAdd(){
+                this.$router.push('/add');
+            }
+        }        
+    }
 </script>
 
 <style scoped>

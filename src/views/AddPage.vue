@@ -16,22 +16,22 @@
                     <input class="monnigIn" type="text" id="monnig-number" v-model="sampleData.monnig_number">
                     <br>
                     <label for="country">Country:</label>
-                    <input class="countryIn" type="text" id="country" v-model="SampleData.country">
+                    <input class="countryIn" type="text" id="country" v-model="sampleData.country">
                     <br>
                     <label for="sample-class">Class:</label>
-                    <input class="classIn" type="text" id="sample-class" v-model="SampleData.sample_class">
+                    <input class="classIn" type="text" id="sample-class" v-model="sampleData.sample_class">
                     <br>
                     <label for="group">Group:</label>
-                    <input class="groupIn" type="text" id="sample-class" v-model="SampleData.group">
+                    <input class="groupIn" type="text" id="sample-class" v-model="sampleData.group">
                     <br>
                     <label for="year">Year found:</label>
-                    <input class="yearIn" type="text" id="year" v-model="SampleData.date_found_year">
+                    <input class="yearIn" type="text" id="year" v-model="sampleData.date_found_year">
                     <br>
                     <label for="weight">Sample weight:</label>
-                    <input class="weightIn" type="number" id="weight" v-model="SampleData.date_found_year">
+                    <input class="weightIn" type="number" id="weight" v-model="sampleData.date_found_year">
                     <br>
-                    <button @click="$emit('exit-add')">Cancel submission</button>
-                    <button @click="$emit('exit-add')" class="addButton" type="submit">Add</button>
+                    <button @click="goToHome">Cancel submission</button>
+                    <button class="addButton" type="submit">Add</button>
                 </form>
             </div>
         </div>
@@ -70,6 +70,9 @@ import axios from 'axios';
                 }catch(error){
                     console.error('POST request error: ', error);
                 }
+            },
+            goToHome(){
+                this.$router.push('/')
             }
         }
     }
