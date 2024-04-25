@@ -42,8 +42,13 @@
     </div>
 </template>
 
-<script setup>
-
+<script>
+    export default {
+        mounted() {
+            const sampleId = this.$route.params.userId;
+            console.log(sampleId);
+        }   
+    }
 </script>
 
 <style scoped>

@@ -29,7 +29,7 @@
                     </div>
                     <div class="tableContent">
                         <div v-for="(item, index) in samples" :key="index" class="tableRow">
-                            <div @click="goToView" class="nameCell">{{ item.name }}</div>
+                            <div @click="goToView(item.id)" class="nameCell">{{ item.name }}</div>
                             <div>{{ item.monnig_number }}</div>
                             <div>{{ item.country }}</div>
                             <div>{{ item.sample_class }}</div>
@@ -79,8 +79,8 @@ import axios from 'axios';
                     console.error('Error fetching data:', error);
                 }
             },
-            gotToView(){
-                this.$router.push('/view-sample')
+            goToView(sample_id){
+                this.$router.push({name: 'ViewSample', params: {sample_id}});
             }
         }      
     }
