@@ -52,7 +52,7 @@
     export default{
         methods:{
             goToAdd(){
-                this.$router.push('/add');
+                this.$router.push('/add-sample');
             }
         },
         components:{

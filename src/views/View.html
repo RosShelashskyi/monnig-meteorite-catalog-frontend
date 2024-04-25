@@ -47,7 +47,13 @@
             grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
-        
+        .details{
+            font-weight: bold;
+        }
+        .buttons{
+            display: flex;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -58,7 +64,7 @@
         </div>
         <div class="bottom">
             <div class="contentWindow"> 
-                Sample details:
+                <div class="details">Sample details:</div>
                 <div class="entry">
                     <div>Name:</div>
                     <div>{{}}</div>
@@ -69,21 +75,24 @@
                 </div>
                 <div class="entry">
                     <div>Stuff</div>
-                    <div>Stuff</div>
+                    <div>{{}}</div>
                 </div>
                 <div class="entry">
                     <div>Stuff</div>
-                    <div>Stuff</div>
+                    <div>{{}}</div>
                 </div>
                 <div class="entry">
                     <div>Stuff</div>
-                    <div>Stuff</div>
+                    <div>{{}}</div>
                 </div>
                 <div class="entry">
                     <div>Stuff</div>
-                    <div>Stuff</div>
+                    <div>{{}}</div>
                 </div>
-
+                <div class="buttons">
+                    <button>Update sample</button>
+                    <button>Delete sample</button>
+                </div>
             </div>
         </div>
     </div>

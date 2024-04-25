@@ -2,7 +2,7 @@
     <div>
         <div>
             <div v-for="(item, index) in samples" :key="index" class="tableRow">
-                <div>{{ item.name }}</div>
+                <div @click="goToView" class="nameCell">{{ item.name }}</div>
                 <div>{{ item.monnig_number }}</div>
                 <div>{{ item.country }}</div>
                 <div>{{ item.sample_class }}</div>
@@ -35,6 +35,9 @@
                 }catch(error){
                     console.error('Error fetching data:', error);
                 }
+            },
+            gotToView(){
+                this.$router.push('/view-sample')
             }
         }
     };
@@ -51,5 +54,10 @@
         display: grid;
         grid-template-columns: repeat(7, minmax(0, 1fr));
         background-color: #A9A9A9;
+    }
+
+    .nameCell{
+        text-decoration: underline;
+        cursor: pointer;
     }
 </style>
