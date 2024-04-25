@@ -28,7 +28,15 @@
                         <div class="tableTopElement">Weight</div>
                     </div>
                     <div class="tableContent">
-                        <ContentTable/>
+                        <div v-for="(item, index) in samples" :key="index" class="tableRow">
+                            <div @click="goToView(item.id)" class="nameCell">{{ item.name }}</div>
+                            <div>{{ item.monnig_number }}</div>
+                            <div>{{ item.country }}</div>
+                            <div>{{ item.sample_class }}</div>
+                            <div>{{ item.group }}</div>
+                            <div>{{ item.date_found_year }}</div>
+                            <div>{{ item.sample_weight_g }}</div>
+                        </div>
                     </div>
                     <div class="tableBottom">
                         <div>Results</div>
@@ -47,17 +55,34 @@
 </template>
 
 <script>
-    import ContentTable from '@/components/ContentTable.vue';
+import axios from 'axios';
 
     export default{
+        data(){
+            return {
+                samples: []
+            };
+        },
+        mounted(){
+            this.fetchData();
+        },
         methods:{
             goToAdd(){
-                this.$router.push('/add');
+                this.$router.push('/add-sample');
+            },
+            async fetchData(){
+                try{
+                    const response = await axios.get('http://localhost:8080/api/samples/all');
+                    this.samples = response.data;
+                    this.samples = this.samples.data;
+                }catch(error){
+                    console.error('Error fetching data:', error);
+                }
+            },
+            goToView(sample_id){
+                this.$router.push('/view-sample/' + sample_id);
             }
-        },
-        components:{
-            ContentTable
-        }        
+        }      
     }
 </script>
 
@@ -188,6 +213,17 @@
         }
 
         .goTo{
+            cursor: pointer;
+        }
+
+        .tableRow{
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            background-color: #A9A9A9;
+        }
+
+        .nameCell{
+            text-decoration: underline;
             cursor: pointer;
         }
 </style>
