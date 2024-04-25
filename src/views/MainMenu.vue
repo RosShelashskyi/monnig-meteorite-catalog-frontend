@@ -80,7 +80,7 @@ import axios from 'axios';
                 }
             },
             goToView(sample_id){
-                this.$router.push({name: 'ViewSample', params: {sample_id}});
+                this.$router.push('/view-sample/' + sample_id);
             }
         }      
     }

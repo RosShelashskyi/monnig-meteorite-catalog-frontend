@@ -10,31 +10,39 @@
                 <div class="details">Sample details:</div>
                 <div class="entry">
                     <div>Name:</div>
-                    <div>{{}}</div>
+                    <div>{{sample.name}}</div>
                 </div>
                 <div class="entry">
                     <div>Monnig number: </div>
-                    <div>{{}}</div>
+                    <div>{{sample.monnig_number}}</div>
                 </div>
                 <div class="entry">
-                    <div>Stuff</div>
-                    <div>{{}}</div>
+                    <div>Country</div>
+                    <div>{{sample.country}}</div>
                 </div>
                 <div class="entry">
-                    <div>Stuff</div>
-                    <div>{{}}</div>
+                    <div>Class</div>
+                    <div>{{sample.sample_class}}</div>
                 </div>
                 <div class="entry">
-                    <div>Stuff</div>
-                    <div>{{}}</div>
+                    <div>Group</div>
+                    <div>{{sample.group}}</div>
                 </div>
                 <div class="entry">
-                    <div>Stuff</div>
-                    <div>{{}}</div>
+                    <div>Year found</div>
+                    <div>{{sample.date_found_year}}</div>
                 </div>
-                <div class="buttons">
-                    <button>Update sample</button>
-                    <button>Delete sample</button>
+                <div class="entry">
+                    <div>Sample weight (g)</div>
+                    <div>{{sample.sample_weight_g}}</div>
+                </div>
+                <div class="entry">
+                    <button @click="goToHome" class="backButton">Back</button>
+                    <div>
+                        <button>Update sample</button>
+                        <button>Delete sample</button>
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -43,10 +51,29 @@
 </template>
 
 <script>
+import axios from 'axios'
     export default {
+        data(){
+            return{
+                sample: ''
+            }
+        },
         mounted() {
-            const sampleId = this.$route.params.userId;
-            console.log(sampleId);
+            this.fetchData(this.$route.params.sample_id);
+        },
+        methods:{
+            async fetchData(sample_id){
+                try{
+                    const response = await axios.get('http://localhost:8080/api/samples/view/' + sample_id);
+                    this.sample = response.data;
+                    this.sample = this.sample.data;
+                }catch(error){
+                    console.error('Error fetching data:', error);
+                }
+            },
+            goToHome(){
+                this.$router.push('/')
+            }
         }   
     }
 </script>
@@ -100,5 +127,9 @@
     .buttons{
         display: flex;
         margin-top: 10px;
+    }
+    .backButton{
+        margin-right: 20px;
+        width: 10%;
     }
 </style>
