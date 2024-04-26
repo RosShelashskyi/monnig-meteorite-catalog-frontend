@@ -40,9 +40,8 @@
                     <button @click="goToHome" class="backButton">Back</button>
                     <div>
                         <button>Update sample</button>
-                        <button>Delete sample</button>
+                        <button @click="deleteSample">Delete sample</button>
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -73,6 +72,14 @@ import axios from 'axios'
             },
             goToHome(){
                 this.$router.push('/')
+            },
+            async deleteSample(sample_id){
+                try{
+                    const response = await axios.delete('http://localhost:8080/api/samples/delete/' + sample_id);
+                    console.log(response)
+                }catch(error){
+                    console.error('Delete Error:', error);
+                }
             }
         }   
     }
