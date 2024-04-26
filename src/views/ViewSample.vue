@@ -39,7 +39,7 @@
                 <div class="entry">
                     <button @click="goToHome" class="backButton">Back</button>
                     <div>
-                        <button>Update sample</button>
+                        <button @click="goToUpdate">Update sample</button>
                         <button @click="deleteSample">Delete sample</button>
                     </div>
                 </div>
@@ -80,6 +80,9 @@ import axios from 'axios'
                 }catch(error){
                     console.error('Delete Error:', error);
                 }
+            },
+            goToUpdate(){
+                this.$router.push('/update-sample/' + this.sample.id)
             }
         }   
     }

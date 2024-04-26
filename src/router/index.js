@@ -2,14 +2,16 @@ import {createRouter, createMemoryHistory} from 'vue-router';
 
 import MainMenu from "@/views/MainMenu.vue"
 import AddPage from "@/views/AddPage.vue"
-import ViewSample from '@/views/ViewSample.vue';
+import ViewSample from '@/views/ViewSample.vue'
+import UpdateSample from '@/views/UpdateSample.vue'
 
 const router = createRouter({
     history: createMemoryHistory(),
     routes: [
         {path: '/', name: 'MainMenu', component: MainMenu},
         {path: '/add-sample', name: 'AddSample', component: AddPage},
-        {path: '/view-sample/:sample_id', name: 'ViewSample', component: ViewSample}
+        {path: '/view-sample/:sample_id', name: 'ViewSample', component: ViewSample},
+        {path: '/update-sample/:sample_id', name: 'UpdateSample', component: UpdateSample}
     ]
 });
 
