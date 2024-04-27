@@ -48,8 +48,6 @@ import cacheUtils from '@/utils/cacheUtils';
                     token = token.token;
                     console.log(token);
                     cacheUtils.set(0, token)
-                    let result = cacheUtils.get(0);
-                    console.log(result);
                     this.$router.push('/');
                 }catch(error){
                     console.error('Login error: ', error);

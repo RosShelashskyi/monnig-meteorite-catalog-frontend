@@ -59,6 +59,7 @@
 
 <script>
 import axios from 'axios';
+import cacheUtils from '@/utils/cacheUtils';
 
     export default{
         data(){
@@ -67,11 +68,17 @@ import axios from 'axios';
             };
         },
         mounted(){
+            
             this.fetchData();
         },
         methods:{
             goToAdd(){
-                this.$router.push('/add-sample');
+                if(cacheUtils.get(0) == null){
+                    alert('Curator priviledges are required');
+                }else{
+                    this.$router.push('/add-sample');
+                }
+                
             },
             async fetchData(){
                 try{
