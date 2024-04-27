@@ -72,7 +72,7 @@ import axios from 'axios';
             },
             async fetchData(){
                 try{
-                    const response = await axios.get('http://localhost:8080/api/samples/all');
+                    const response = await axios.get('http://localhost:8080/api/samples/view/all');
                     this.samples = response.data;
                     this.samples = this.samples.data;
                 }catch(error){
