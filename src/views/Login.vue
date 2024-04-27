@@ -13,7 +13,7 @@
                     <input class="usernameIn" type="text" id="name" v-model="username">
                     <br>
                     <label for="monnig-number">Password:</label>
-                    <input class="passwordIn" type="text" id="monnig-number" v-model="password">
+                    <input class="passwordIn" type="password" id="monnig-number" v-model="password">
                     <br>
                     <button @click="goToHome">Cancel</button>
                     <button class="addButton" type="submit">Log in</button>
@@ -38,12 +38,18 @@ import cacheUtils from '@/utils/cacheUtils';
             async login(){
                 try{
                     let info = btoa(this.username + ':' + this.password)
-                    const token = await axios.post('http://localhost:8080/api/users/login', null, {
+                    let token = await axios.post('http://localhost:8080/api/users/login', null, {
                         headers: {
-                            'Authorization': 'Basic ${info}'
+                            'Authorization': 'Basic ' + info
                         }
                     });
-                    cacheUtils.set(0, token.data.token)
+                    token = token.data;
+                    token = token.data;
+                    token = token.token;
+                    console.log(token);
+                    cacheUtils.set(0, token)
+                    let result = cacheUtils.get(0);
+                    console.log(result);
                     this.$router.push('/');
                 }catch(error){
                     console.error('Login error: ', error);

@@ -3,8 +3,11 @@
 <template>
     <div class="mainWindow">
         <div class = "top">
-            <img src="../assets/TCU.jpg" class="logo">
-            <div class="title">Monnig Meteorite Catalog</div>
+            <div class="topLeft">
+                <img src="../assets/TCU.jpg" class="logo">
+                <div class="title">Monnig Meteorite Catalog</div>
+            </div>
+            <button @click="goToLogin" class="add">Curator login</button>
         </div>
         <div class="bottom">
             <div class="contentWindow"> 
@@ -81,6 +84,9 @@ import axios from 'axios';
             },
             goToView(sample_id){
                 this.$router.push('/view-sample/' + sample_id);
+            },
+            goToLogin(){
+                this.$router.push('/login');
             }
         }      
     }
@@ -94,6 +100,12 @@ import axios from 'axios';
         }
     
         .top{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .topLeft{
             display: flex;
             flex-direction: row;
         }
