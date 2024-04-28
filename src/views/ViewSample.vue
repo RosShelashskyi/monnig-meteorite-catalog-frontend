@@ -40,7 +40,7 @@
                     <button @click="goToHome" class="backButton">Back</button>
                     <div>
                         <button @click="goToUpdate">Update sample</button>
-                        <button @click="deleteSample">Delete sample</button>
+                        <button @click="deleteSample(this.sample.id)">Delete sample</button>
                     </div>
                 </div>
             </div>
@@ -79,8 +79,14 @@ import axios from 'axios'
                     alert('Curator priviledges are required');
                 }else{
                     try{
-                        const response = await axios.delete('http://localhost:8080/api/samples/delete/' + sample_id);
-                        console.log(response)
+                        await axios({
+                            method: 'delete',
+                            url: 'http://localhost:8080/api/samples/delete/' + sample_id,
+                            headers: {
+                                'Authorization': 'Bearer ' + cacheUtils.get(0)
+                            }
+                        })
+                        this.$router.push('/')
                     }catch(error){
                         console.error('Delete Error:', error);
                     }
