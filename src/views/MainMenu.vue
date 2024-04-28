@@ -1,5 +1,3 @@
-
-
 <template>
     <div class="mainWindow">
         <div class = "top">
@@ -7,7 +5,8 @@
                 <img src="../assets/TCU.jpg" class="logo">
                 <div class="title">Monnig Meteorite Catalog</div>
             </div>
-            <button @click="goToLogin" class="add">Curator login</button>
+            <button v-if=!loggedIn @click="goToLogin" class="add">Curator login</button>
+            <button v-if=loggedIn @click="logout" class="add">Log out</button>
         </div>
         <div class="bottom">
             <div class="contentWindow"> 
@@ -64,12 +63,17 @@ import cacheUtils from '@/utils/cacheUtils';
     export default{
         data(){
             return {
-                samples: []
+                samples: [],
+                loggedIn: ''
             };
         },
         mounted(){
-            
             this.fetchData();
+            if(cacheUtils.get(0) != null){
+                this.loggedIn = true;
+            }else{
+                this.loggedIn = false;
+            }
         },
         methods:{
             goToAdd(){
@@ -94,6 +98,10 @@ import cacheUtils from '@/utils/cacheUtils';
             },
             goToLogin(){
                 this.$router.push('/login');
+            },
+            logout(){
+                localStorage.clear();
+                this.loggedIn = false;
             }
         }      
     }
