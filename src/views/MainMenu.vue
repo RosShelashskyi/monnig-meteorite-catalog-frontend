@@ -101,6 +101,7 @@ import cacheUtils from '@/utils/cacheUtils';
             },
             logout(){
                 localStorage.clear();
+                alert("Successfully logged out");
                 this.loggedIn = false;
             }
         }      
