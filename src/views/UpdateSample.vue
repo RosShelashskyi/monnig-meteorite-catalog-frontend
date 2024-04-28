@@ -2,11 +2,13 @@
     <div>
         <div class="mainWindow">
             <div class = "top">
-                <img src="../assets/TCU.jpg" class="logo">
-                <div class="title">Monnig Meteorite Catalog</div>
+                <div class="topLeft">
+                    <img src="../assets/TCU.jpg" class="logo">
+                    <div class="title">Monnig Meteorite Catalog</div>
+                </div>
+                <button @click="logout" class="loginButton">Log out</button>
             </div>
             <div class="bottom">
-                
                 <form @submit.prevent="updateSample">
                     <div class="prompt">Input the meteorite sample data:</div>
                     <label for="name">Name:</label>
@@ -83,84 +85,106 @@ import cacheUtils from '@/utils/cacheUtils';
             },
             goToView(){
                 this.$router.push('/view-sample/' + this.$route.params.sample_id);
+            },
+            logout(){
+                localStorage.clear();
+                alert("Successfully logged out");
+                this.$router.push('/');
             }
         }
     }
 </script>
 
 <style scoped>
-        .mainWindow{
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
+    .mainWindow{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    }
+
+    .topLeft{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .loginButton{
+        background: #4D1979;
+        color: white;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 15px;
+        padding-right: 15px;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .title{
+        color: #4D1979;
+        font-weight: bold;
+        font-size: x-large;
+        margin-top: 1%;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    .logo{
+        width: 70px;
+    }
+
+    .bottom{
+        height: 100%;
+    }
+
+    form{
+        margin-top: 10%;
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+
+    input{
+        margin-bottom: 5px;
+    }
+
+    .nameIn{
+        margin-left: 89px;
+    }
+
+    .monnigIn{
+        margin-left: 20px;
+    }
+
+    .countryIn{
+        margin-left: 76px;
+    }
+
+    .classIn{
+        margin-left: 94px;
+    }
+
+    .groupIn{
+        margin-left: 88px;
+    }
+
+    .yearIn{
+        margin-left: 58px;
+    }
     
-        .top{
-            display: flex;
-            flex-direction: row;
-        }
+    .weightIn{
+        margin-left: 32px;
+    }
 
-        .title{
-            color: #4D1979;
-            font-weight: bold;
-            font-size: x-large;
-            margin-top: 1%;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        }
+    .prompt{
+        margin-bottom: 20px;
+        font-size: large;
+        font-weight: bold;;
+    }
 
-        .logo{
-            width: 70px;
-        }
-
-        .bottom{
-            height: 100%;
-        }
-
-        form{
-            margin-top: 10%;
-            margin-left: 15%;
-            margin-right: 15%;
-        }
-
-        input{
-            margin-bottom: 5px;
-        }
-
-        .nameIn{
-            margin-left: 89px;
-        }
-
-        .monnigIn{
-            margin-left: 20px;
-        }
-
-        .countryIn{
-            margin-left: 76px;
-        }
-
-        .classIn{
-            margin-left: 94px;
-        }
-
-        .groupIn{
-            margin-left: 88px;
-        }
-
-        .yearIn{
-            margin-left: 58px;
-        }
-        
-        .weightIn{
-            margin-left: 32px;
-        }
-
-        .prompt{
-            margin-bottom: 20px;
-            font-size: large;
-            font-weight: bold;;
-        }
-
-        .addButton{
-            margin-left: 25%;
-        }
+    .addButton{
+        margin-left: 25%;
+    }
 </style>

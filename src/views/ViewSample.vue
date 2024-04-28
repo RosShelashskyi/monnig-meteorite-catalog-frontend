@@ -1,9 +1,12 @@
 <template>
-    <div>
-        <div class="mainWindow">
+    <div class="mainWindow">
         <div class = "top">
-            <img src="../assets/TCU.jpg" class="logo">
-            <div class="title">Monnig Meteorite Catalog</div>
+            <div class="topLeft">
+                <img src="../assets/TCU.jpg" class="logo">
+                <div class="title">Monnig Meteorite Catalog</div>
+            </div>
+            <button v-if=!loggedIn @click="goToLogin" class="loginButton">Curator login</button>
+            <button v-if=loggedIn @click="logout" class="loginButton">Log out</button>
         </div>
         <div class="bottom">
             <div class="contentWindow"> 
@@ -46,20 +49,26 @@
             </div>
         </div>
     </div>
-    </div>
 </template>
 
 <script>
 import cacheUtils from '@/utils/cacheUtils';
 import axios from 'axios'
+
     export default {
         data(){
             return{
-                sample: ''
+                sample: '',
+                loggedIn: ''
             }
         },
         mounted() {
             this.fetchData(this.$route.params.sample_id);
+            if(cacheUtils.get(0) != null){
+                this.loggedIn = true;
+            }else{
+                this.loggedIn = false;
+            }
         },
         methods:{
             async fetchData(sample_id){
@@ -99,6 +108,14 @@ import axios from 'axios'
                     this.$router.push('/update-sample/' + this.sample.id);
                 }
                 
+            },
+            goToLogin(){
+                this.$router.push('/login')  
+            },
+            logout(){
+                localStorage.clear();
+                alert("Successfully logged out");
+                this.loggedIn = false;
             }
         }   
     }
@@ -114,6 +131,23 @@ import axios from 'axios'
     .top{
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .topLeft{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .loginButton{
+        background: #4D1979;
+        color: white;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 15px;
+        padding-right: 15px;
+        text-decoration: underline;
+        cursor: pointer;
     }
 
     .title{
