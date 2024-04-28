@@ -1,3 +1,4 @@
+//Used to store and get data from local storage
 export default{
     set(key, data, expire){
         let cachedValue = {data};

@@ -58,12 +58,13 @@ import axios from 'axios'
     export default {
         data(){
             return{
-                sample: '',
-                loggedIn: ''
+                sample: '',     //stores sample data
+                loggedIn: ''    //stores login state
             }
         },
         mounted() {
-            this.fetchData(this.$route.params.sample_id);
+            this.fetchData(this.$route.params.sample_id);   //fetches samples from API
+            //prints a login or a logout button depending on the login state
             if(cacheUtils.get(0) != null){
                 this.loggedIn = true;
             }else{
@@ -71,8 +72,10 @@ import axios from 'axios'
             }
         },
         methods:{
+            //fetches data from the API
             async fetchData(sample_id){
                 try{
+                    //GET request to the API
                     const response = await axios.get('http://localhost:8080/api/samples/view/' + sample_id);
                     this.sample = response.data;
                     this.sample = this.sample.data;
@@ -80,14 +83,17 @@ import axios from 'axios'
                     console.error('Error fetching data:', error);
                 }
             },
+            //redirects the user to the main menu
             goToHome(){
                 this.$router.push('/')
             },
+            //makes a request to the API to delete the sample if the user is logged in
             async deleteSample(sample_id){
                 if(cacheUtils.get(0) == null){
                     alert('Curator priviledges are required');
                 }else{
                     try{
+                        //makes a DELETE request to the API
                         await axios({
                             method: 'delete',
                             url: 'http://localhost:8080/api/samples/delete/' + sample_id,
@@ -101,6 +107,7 @@ import axios from 'axios'
                     }
                 }
             },
+            //redirects the user to the update page if they are logged in
             goToUpdate(){
                 if(cacheUtils.get(0) == null){
                     alert('Curator priviledges are required');
@@ -109,9 +116,11 @@ import axios from 'axios'
                 }
                 
             },
+            //redirects the user to the login page
             goToLogin(){
                 this.$router.push('/login')  
             },
+            //logs out the user
             logout(){
                 localStorage.clear();
                 alert("Successfully logged out");

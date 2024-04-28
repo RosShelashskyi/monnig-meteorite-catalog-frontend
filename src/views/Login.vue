@@ -30,29 +30,37 @@ import cacheUtils from '@/utils/cacheUtils';
     export default{
         data(){
             return{
-                username: '',
-                password: ''
+                username: '',   //stores username
+                password: ''    //stores password
             };
         },
         methods: {
+            //makes a login request to the API
             async login(){
                 try{
+                    //base64-encodes username and password with for Basic Authorization
                     let info = btoa(this.username + ':' + this.password)
+                    //makes a POST request to the API
                     let token = await axios.post('http://localhost:8080/api/users/login', null, {
                         headers: {
+                            //Authorization header with encoded username and password
                             'Authorization': 'Basic ' + info
                         }
                     });
+                    //extract the jwt token from the API response
                     token = token.data;
                     token = token.data;
                     token = token.token;
-                    console.log(token);
+
+                    //saves the token to local storage
                     cacheUtils.set(0, token)
+                    //redirects the user home
                     this.$router.push('/');
                 }catch(error){
                     console.error('Login error: ', error);
                 }
             },
+            //redirects the user home 
             goToHome(){
                 this.$router.push('/');
             }

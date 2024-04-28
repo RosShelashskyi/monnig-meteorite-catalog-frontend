@@ -47,6 +47,7 @@ import axios from 'axios';
     export default{
         data(){
             return{
+                //stores data that will be sent to the API
                 sampleData: {
                     name: '',
                     monnig_number: '',
@@ -59,9 +60,12 @@ import axios from 'axios';
             };
         },
         methods: {
+            //sends the user input data to the API
             async addSample(){
                 try{
+                    //makes a POST request to the API
                     const request = await axios.post('http://localhost:8080/api/samples/add', {
+                        //request body
                         "name": this.sampleData.name,
                         "monnig_number": this.sampleData.monnig_number,
                         "country": this.sampleData.country,
@@ -71,6 +75,7 @@ import axios from 'axios';
                         "sample_weight_g": this.sampleData.sample_weight_g
                     }, {
                         headers: {
+                            //sends the JWT token to the API for authorization
                             'Authorization': 'Bearer ' + cacheUtils.get(0)
                         }
                     });
@@ -79,9 +84,11 @@ import axios from 'axios';
                     console.error('POST request error: ', error);
                 }
             },
+            //redirects the user to the main menu
             goToHome(){
                 this.$router.push('/')
             },
+            //logs the user out and redirects them to the main menu
             logout(){
                 localStorage.clear();
                 alert("Successfully logged out");

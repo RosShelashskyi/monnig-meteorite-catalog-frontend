@@ -47,15 +47,18 @@ import cacheUtils from '@/utils/cacheUtils';
     export default{
         data(){
             return{
-                sample: ''
+                sample: ''      //stores fetched sample data
             };
         },
         mounted(){
+            //fetch sample data from API
             this.fetchData(this.$route.params.sample_id)
         },
         methods: {
+            //gets sample data from API
             async fetchData(sample_id){
                 try{
+                    //GET request to the API
                     const response = await axios.get('http://localhost:8080/api/samples/view/' + sample_id);
                     this.sample = response.data;
                     this.sample = this.sample.data;
@@ -63,9 +66,12 @@ import cacheUtils from '@/utils/cacheUtils';
                     console.error('Error fetching data:', error);
                 }
             },
+            //makes an API request to update the sample with user input
             async updateSample(){
                 try{
+                    //makes a PUT request to the API
                     const request = await axios.put('http://localhost:8080/api/samples/update/' + this.$route.params.sample_id, {
+                        //request body
                         name: this.sample.name,
                         monnig_number: this.sample.monnig_number,
                         country: this.sample.country,
@@ -75,6 +81,7 @@ import cacheUtils from '@/utils/cacheUtils';
                         sample_weight_g: this.sample.sample_weight_g
                     }, {
                         headers: {
+                            //sends the JWT token to the API for authorization
                             'Authorization': 'Bearer ' + cacheUtils.get(0)
                         }
                     });
@@ -84,9 +91,11 @@ import cacheUtils from '@/utils/cacheUtils';
                 }
             },
             goToView(){
+                //redirects the user back to sample view page
                 this.$router.push('/view-sample/' + this.$route.params.sample_id);
             },
             logout(){
+                //logs the user out
                 localStorage.clear();
                 alert("Successfully logged out");
                 this.$router.push('/');

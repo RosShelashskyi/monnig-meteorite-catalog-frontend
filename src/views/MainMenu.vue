@@ -1,3 +1,4 @@
+<!-- This is the main page that redirects the user to all other pages -->
 <template>
     <div class="mainWindow">
         <div class = "top">
@@ -63,12 +64,13 @@ import cacheUtils from '@/utils/cacheUtils';
     export default{
         data(){
             return {
-                samples: [],
-                loggedIn: ''
+                samples: [],        //stores the samples fetched from backend
+                loggedIn: ''        //stores login state
             };
         },
         mounted(){
-            this.fetchData();
+            this.fetchData();       //fetches samples from API
+            //prints a login or a logout button depending on the login state
             if(cacheUtils.get(0) != null){
                 this.loggedIn = true;
             }else{
@@ -76,16 +78,18 @@ import cacheUtils from '@/utils/cacheUtils';
             }
         },
         methods:{
+            //redirects the user to the add sample page if they are logged in
             goToAdd(){
                 if(cacheUtils.get(0) == null){
                     alert('Curator priviledges are required');
                 }else{
                     this.$router.push('/add-sample');
                 }
-                
             },
+            //fetches data from the API
             async fetchData(){
                 try{
+                    //GET request to the API
                     const response = await axios.get('http://localhost:8080/api/samples/view/all');
                     this.samples = response.data;
                     this.samples = this.samples.data;
@@ -93,12 +97,15 @@ import cacheUtils from '@/utils/cacheUtils';
                     console.error('Error fetching data:', error);
                 }
             },
+            //redirects the user to the sample view page
             goToView(sample_id){
                 this.$router.push('/view-sample/' + sample_id);
             },
+            //redirects the user to the login page
             goToLogin(){
                 this.$router.push('/login');
             },
+            //logs out the user
             logout(){
                 localStorage.clear();
                 alert("Successfully logged out");
