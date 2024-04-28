@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import cacheUtils from '@/utils/cacheUtils';
 import axios from 'axios';
 
     export default{
@@ -59,14 +60,19 @@ import axios from 'axios';
             async addSample(){
                 try{
                     const request = await axios.post('http://localhost:8080/api/samples/add', {
-                        name: this.sampleData.name,
-                        monnig_number: this.sampleData.monnig_number,
-                        country: this.sampleData.country,
-                        class: this.sampleData.class,
-                        group: this.sampleData.group,
-                        date_found_year: this.sampleData.date_found_year,
-                        sample_weight_g: this.sampleData.sample_weight_g
+                        "name": this.sampleData.name,
+                        "monnig_number": this.sampleData.monnig_number,
+                        "country": this.sampleData.country,
+                        "sample_class": this.sampleData.sample_class,
+                        "group": this.sampleData.group,
+                        "date_found_year": this.sampleData.date_found_year,
+                        "sample_weight_g": this.sampleData.sample_weight_g
+                    }, {
+                        headers: {
+                            'Authorization': 'Bearer ' + cacheUtils.get(0)
+                        }
                     });
+                    this.$router.push('/');
                 }catch(error){
                     console.error('POST request error: ', error);
                 }

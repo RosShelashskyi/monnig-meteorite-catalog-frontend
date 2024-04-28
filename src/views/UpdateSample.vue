@@ -40,6 +40,7 @@
 
 <script>
 import axios from 'axios';
+import cacheUtils from '@/utils/cacheUtils';
 
     export default{
         data(){
@@ -62,16 +63,20 @@ import axios from 'axios';
             },
             async updateSample(){
                 try{
-                    const request = await axios.put('http://localhost:8080/api/samples/update' + this.$route.params.sample_id, {
+                    const request = await axios.put('http://localhost:8080/api/samples/update/' + this.$route.params.sample_id, {
                         name: this.sample.name,
                         monnig_number: this.sample.monnig_number,
                         country: this.sample.country,
-                        class: this.sample.class,
+                        sample_class: this.sample.sample_class,
                         group: this.sample.group,
                         date_found_year: this.sample.date_found_year,
                         sample_weight_g: this.sample.sample_weight_g
+                    }, {
+                        headers: {
+                            'Authorization': 'Bearer ' + cacheUtils.get(0)
+                        }
                     });
-                    console.log(request);
+                    this.$router.push('/');
                 }catch(error){
                     console.error('PUT request error: ', error);
                 }

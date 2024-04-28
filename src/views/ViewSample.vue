@@ -40,7 +40,7 @@
                     <button @click="goToHome" class="backButton">Back</button>
                     <div>
                         <button @click="goToUpdate">Update sample</button>
-                        <button @click="deleteSample">Delete sample</button>
+                        <button @click="deleteSample(this.sample.id)">Delete sample</button>
                     </div>
                 </div>
             </div>
@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import cacheUtils from '@/utils/cacheUtils';
 import axios from 'axios'
     export default {
         data(){
@@ -74,15 +75,30 @@ import axios from 'axios'
                 this.$router.push('/')
             },
             async deleteSample(sample_id){
-                try{
-                    const response = await axios.delete('http://localhost:8080/api/samples/delete/' + sample_id);
-                    console.log(response)
-                }catch(error){
-                    console.error('Delete Error:', error);
+                if(cacheUtils.get(0) == null){
+                    alert('Curator priviledges are required');
+                }else{
+                    try{
+                        await axios({
+                            method: 'delete',
+                            url: 'http://localhost:8080/api/samples/delete/' + sample_id,
+                            headers: {
+                                'Authorization': 'Bearer ' + cacheUtils.get(0)
+                            }
+                        })
+                        this.$router.push('/')
+                    }catch(error){
+                        console.error('Delete Error:', error);
+                    }
                 }
             },
             goToUpdate(){
-                this.$router.push('/update-sample/' + this.sample.id)
+                if(cacheUtils.get(0) == null){
+                    alert('Curator priviledges are required');
+                }else{
+                    this.$router.push('/update-sample/' + this.sample.id);
+                }
+                
             }
         }   
     }

@@ -3,8 +3,11 @@
 <template>
     <div class="mainWindow">
         <div class = "top">
-            <img src="../assets/TCU.jpg" class="logo">
-            <div class="title">Monnig Meteorite Catalog</div>
+            <div class="topLeft">
+                <img src="../assets/TCU.jpg" class="logo">
+                <div class="title">Monnig Meteorite Catalog</div>
+            </div>
+            <button @click="goToLogin" class="add">Curator login</button>
         </div>
         <div class="bottom">
             <div class="contentWindow"> 
@@ -56,6 +59,7 @@
 
 <script>
 import axios from 'axios';
+import cacheUtils from '@/utils/cacheUtils';
 
     export default{
         data(){
@@ -64,11 +68,17 @@ import axios from 'axios';
             };
         },
         mounted(){
+            
             this.fetchData();
         },
         methods:{
             goToAdd(){
-                this.$router.push('/add-sample');
+                if(cacheUtils.get(0) == null){
+                    alert('Curator priviledges are required');
+                }else{
+                    this.$router.push('/add-sample');
+                }
+                
             },
             async fetchData(){
                 try{
@@ -81,6 +91,9 @@ import axios from 'axios';
             },
             goToView(sample_id){
                 this.$router.push('/view-sample/' + sample_id);
+            },
+            goToLogin(){
+                this.$router.push('/login');
             }
         }      
     }
@@ -94,6 +107,12 @@ import axios from 'axios';
         }
     
         .top{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .topLeft{
             display: flex;
             flex-direction: row;
         }
