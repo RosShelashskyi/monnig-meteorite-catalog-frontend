@@ -101,8 +101,8 @@ import cacheUtils from '@/utils/cacheUtils';
                 }
             },
             //redirects the user to the sample view page
-            goToView(sample_id){
-                this.$router.push('/view-sample/' + sample_id);
+            goToView(loan_id){
+                this.$router.push('/loans/' + loan_id);
             },
             //redirects the user to the login page
             goToLogin(){
