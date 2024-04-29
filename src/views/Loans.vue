@@ -14,7 +14,7 @@
                 <div class="buttons">
                     <div>
                         <button @click="goToAdd" class="add">Add</button>
-                        <button @click="goToLoans" class="add">View Loans</button>
+                        <button @click="goToHome" class="add">View Samples</button>
                     </div>
                     <form action="" class="searchBar">
                         <input type="text" placeholder="Search" name="q">
@@ -26,22 +26,16 @@
                 <div class="table">
                     <div class="tableTop">
                         <div class="tableTopElement">Name</div>
-                        <div class="tableTopElement">Monnig Number</div>
-                        <div class="tableTopElement">Country</div>
-                        <div class="tableTopElement">Class</div>
-                        <div class="tableTopElement">Group</div>
-                        <div class="tableTopElement">Year</div>
-                        <div class="tableTopElement">Weight</div>
+                        <div class="tableTopElement">Institution</div>
+                        <div class="tableTopElement">Start Date</div>
+                        <div class="tableTopElement">Due Date</div>
                     </div>
                     <div class="tableContent">
-                        <div v-for="(item, index) in samples" :key="index" class="tableRow">
-                            <div @click="goToView(item.id)" class="nameCell">{{ item.name }}</div>
-                            <div>{{ item.monnig_number }}</div>
-                            <div>{{ item.country }}</div>
-                            <div>{{ item.sample_class }}</div>
-                            <div>{{ item.group }}</div>
-                            <div>{{ item.date_found_year }}</div>
-                            <div>{{ item.sample_weight_g }}</div>
+                        <div v-for="(item, index) in loans" :key="index" class="tableRow">
+                            <div @click="goToView(item.id)" class="nameCell">{{ item.loanee_name }}</div>
+                            <div>{{ item.loanee_institution }}</div>
+                            <div>{{ item.loan_start_date }}</div>
+                            <div>{{ item.loan_due_date }}</div>
                         </div>
                     </div>
                     <div class="tableBottom">
@@ -67,7 +61,7 @@ import cacheUtils from '@/utils/cacheUtils';
     export default{
         data(){
             return {
-                samples: [],        //stores the samples fetched from backend
+                loans: [],          //stores the loans fetched from backend
                 loggedIn: ''        //stores login state
             };
         },
@@ -93,9 +87,15 @@ import cacheUtils from '@/utils/cacheUtils';
             async fetchData(){
                 try{
                     //GET request to the API
-                    const response = await axios.get('http://localhost:8080/api/samples/view/all');
-                    this.samples = response.data;
-                    this.samples = this.samples.data;
+                    const response = await axios({
+                        method: 'get',
+                        url: 'http://localhost:8080/api/loan/all',
+                        headers: {
+                            'Authorization': 'Bearer ' + cacheUtils.get(0)
+                        }
+                    });
+                    this.loans = response.data;
+                    this.loans = this.loans.data;
                 }catch(error){
                     console.error('Error fetching data:', error);
                 }
@@ -114,12 +114,8 @@ import cacheUtils from '@/utils/cacheUtils';
                 alert("Successfully logged out");
                 this.loggedIn = false;
             },
-            goToLoans(){
-                if(cacheUtils.get(0) == null){
-                    alert('Curator priviledges are required');
-                }else{
-                    this.$router.push('/loans');
-                }
+            goToHome(){
+                this.$router.push('/');
             }
         }      
     }
@@ -229,7 +225,7 @@ import cacheUtils from '@/utils/cacheUtils';
 
         .tableTop{
             display: grid;
-            grid-template-columns: repeat(7, minmax(0, 1fr));
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             background: #4D1979;
             padding-top: 7px;
             padding-bottom: 7px;
@@ -263,7 +259,7 @@ import cacheUtils from '@/utils/cacheUtils';
 
         .tableRow{
             display: grid;
-            grid-template-columns: repeat(7, minmax(0, 1fr));
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             background-color: #A9A9A9;
         }
 

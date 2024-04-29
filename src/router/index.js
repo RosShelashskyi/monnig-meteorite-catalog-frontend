@@ -5,6 +5,7 @@ import AddPage from "@/views/AddPage.vue"
 import ViewSample from '@/views/ViewSample.vue'
 import UpdateSample from '@/views/UpdateSample.vue'
 import Login from '@/views/Login.vue';
+import Loans from '@/views/Loans.vue';
 
 const router = createRouter({
     history: createMemoryHistory(),
@@ -13,7 +14,8 @@ const router = createRouter({
         {path: '/add-sample', name: 'AddSample', component: AddPage},
         {path: '/view-sample/:sample_id', name: 'ViewSample', component: ViewSample},
         {path: '/update-sample/:sample_id', name: 'UpdateSample', component: UpdateSample},
-        {path: '/login', name: 'Login', component: Login}
+        {path: '/login', name: 'Login', component: Login},
+        {path: '/loans', name: 'Loans', component: Loans}
     ]
 });
 
