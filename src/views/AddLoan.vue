@@ -11,29 +11,29 @@
             <div class="bottom">
                 <form @submit.prevent="addLoan">
                     <div class="prompt">Input the loan information:</div>
-                    <label for="name">Loanee Name:</label>
+                    <label for="name">Loanee name:</label>
                     <input class="nameIn" type="text" id="name" v-model="loanData.loanee_name">
                     <br>
-                    <label for="monnig-number">Loanee email:</label>
-                    <input class="monnigIn" type="text" id="monnig-number" v-model="loanData.loanee_email">
+                    <label for="email">Loanee email:</label>
+                    <input class="emailIn" type="text" id="email" v-model="loanData.loanee_email">
                     <br>
-                    <label for="monnig-number">Loanee institution:</label>
-                    <input class="monnigIn" type="text" id="monnig-number" v-model="loanData.loanee_institution">
+                    <label for="institution">Loanee institution:</label>
+                    <input class="institutionIn" type="text" id="institution" v-model="loanData.loanee_institution">
                     <br>
-                    <label for="country">Loanee address:</label>
-                    <input class="countryIn" type="text" id="country" v-model="loanData.loanee_address">
+                    <label for="address">Loanee address:</label>
+                    <input class="addressIn" type="text" id="address" v-model="loanData.loanee_address">
                     <br>
-                    <label for="sample-class">Loan start date:</label>
-                    <input class="classIn" type="text" id="sample-class" v-model="loanData.loan_start_date">
+                    <label for="startDate">Loan start date:</label>
+                    <input class="startDateIn" type="text" id="startDate" v-model="loanData.loan_start_date">
                     <br>
-                    <label for="group">Loan due date:</label>
-                    <input class="groupIn" type="text" id="sample-class" v-model="loanData.loan_due_date">
+                    <label for="dueDate">Loan due date:</label>
+                    <input class="dueDateIn" type="text" id="dueDate" v-model="loanData.loan_due_date">
                     <br>
-                    <label for="year">Loan notes:</label>
-                    <input class="yearIn" type="text" id="year" v-model="loanData.loan_notes">
+                    <label for="notes">Loan notes:</label>
+                    <input class="notesIn" type="text" id="notes" v-model="loanData.loan_notes">
                     <br>
-                    <label for="weight">Monnig numbers of samples on loan:</label>
-                    <input class="weightIn" type="text" id="weight" v-model="loanData.samples_on_loan">
+                    <label for="samples">Monnig numbers of samples on loan:</label>
+                    <input class="samplesIn" type="text" id="samples" v-model="loanData.samples_on_loan">
                     <br>
                     <button @click="goToHome">Cancel submission</button>
                     <button class="addButton" type="submit">Add</button>
@@ -94,7 +94,7 @@ import axios from 'axios';
             },
             //redirects the user to the main menu
             goToHome(){
-                this.$router.push('/')
+                this.$router.push('/loans')
             },
             //logs the user out and redirects them to the main menu
             logout(){
@@ -107,7 +107,7 @@ import axios from 'axios';
 </script>
 
 <style scoped>
-    .mainWindow{
+            .mainWindow{
         display: flex;
         flex-direction: column;
         height: 100%;
@@ -162,31 +162,35 @@ import axios from 'axios';
     }
 
     .nameIn{
-        margin-left: 89px;
+        margin-left: 177px;
     }
 
-    .monnigIn{
-        margin-left: 20px;
+    .emailIn{
+        margin-left: 176px;
     }
 
-    .countryIn{
-        margin-left: 76px;
+    .institutionIn{
+        margin-left: 146px;
     }
 
-    .classIn{
-        margin-left: 94px;
+    .addressIn{
+        margin-left: 163px;
     }
 
-    .groupIn{
-        margin-left: 88px;
+    .startDateIn{
+        margin-left:167px;
     }
 
-    .yearIn{
-        margin-left: 58px;
+    .dueDateIn{
+        margin-left: 172px;
     }
     
-    .weightIn{
-        margin-left: 32px;
+    .notesIn{
+        margin-left: 192px;
+    }
+
+    .samplesIn{
+        margin-left: 28px;
     }
 
     .prompt{
