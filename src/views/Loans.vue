@@ -80,7 +80,7 @@ import cacheUtils from '@/utils/cacheUtils';
                 if(cacheUtils.get(0) == null){
                     alert('Curator priviledges are required');
                 }else{
-                    this.$router.push('/add-sample');
+                    this.$router.push('/loans/add');
                 }
             },
             //fetches data from the API
