@@ -9,7 +9,7 @@
                 <button @click="logout" class="loginButton">Log out</button>
             </div>
             <div class="bottom">
-                <form @submit.prevent="addLoan">
+                <form @submit.prevent="updateLoan">
                     <div class="prompt">Input the loan information:</div>
                     <label for="name">Loanee name:</label>
                     <input class="nameIn" type="text" id="name" v-model="loanData.loanee_name">
@@ -35,8 +35,8 @@
                     <label for="samples">Monnig numbers of samples on loan:</label>
                     <input class="samplesIn" type="text" id="samples" v-model="loanData.samples_on_loan">
                     <br>
-                    <button @click="goToHome">Cancel submission</button>
-                    <button class="addButton" type="submit">Add</button>
+                    <button @click="goToView">Cancel submission</button>
+                    <button class="addButton" type="submit">Update</button>
                 </form>
             </div>
         </div>
@@ -51,26 +51,36 @@ import axios from 'axios';
         data(){
             return{
                 //stores data that will be sent to the API
-                loanData: {
-                    loanee_name: '',
-                    loanee_email: '',
-                    loanee_institution: '',
-                    loanee_address: '',
-                    loan_start_date: '',
-                    loan_due_date: '',
-                    loan_notes: '',
-                    samples_on_loan: []
-                }
+                loanData: ''
             };
         },
+        mounted(){
+            this.fetchData(this.$route.params.loan_id)
+        },
         methods: {
+            async fetchData(loan_id){
+                try{
+                    //GET request to the API
+                    const response = await axios({
+                        method: 'get',
+                        url: 'http://localhost:8080/api/loan/view/' + loan_id,
+                        headers :{
+                            'Authorization': 'Bearer ' + cacheUtils.get(0)
+                        }
+                    })
+                    this.loanData = response.data;
+                    this.loanData = this.loanData.data;
+                }catch(error){
+                    console.error('Error fetching data: ', error);
+                }
+            },
             //sends the user input data to the API
-            async addLoan(){
+            async updateLoan(){
                 let temp = this.loanData.samples_on_loan
                 this.loanData.samples_on_loan = temp.split(',')
                 try{
-                    //makes a POST request to the API
-                    const request = await axios.post('http://localhost:8080/api/loan/create', {
+                    //makes a PUT request to the API
+                    const request = await axios.put('http://localhost:8080/api/loan/update/' + this.$route.params.loan_id, {
                         //request body
                         loanee_name: this.loanData.loanee_name,
                         loanee_email: this.loanData.loanee_email,
@@ -89,12 +99,12 @@ import axios from 'axios';
                     });
                     this.$router.push('/loans');
                 }catch(error){
-                    console.error('POST request error: ', error);
+                    console.error('PUT request error: ', error);
                 }
             },
             //redirects the user to the main menu
-            goToHome(){
-                this.$router.push('/loans')
+            goToView(){
+                this.$router.push('/loans/' + this.$route.params.loan_id)
             },
             //logs the user out and redirects them to the main menu
             logout(){

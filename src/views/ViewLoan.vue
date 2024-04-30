@@ -122,7 +122,7 @@ import axios from 'axios'
                 if(cacheUtils.get(0) == null){
                     alert('Curator priviledges are required');
                 }else{
-                    this.$router.push('/update-sample/' + this.sample.id);
+                    this.$router.push('/loans/update/' + this.loan.id);
                 }
             },
             //redirects the user to the login page
