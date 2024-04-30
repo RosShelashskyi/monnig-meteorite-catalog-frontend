@@ -46,8 +46,8 @@
                 <div class="entry">
                     <button @click="goToHome" class="backButton">Back</button>
                     <div>
-                        <button @click="goToUpdate">Update sample</button>
-                        <button @click="deleteSample(this.sample.id)">Delete sample</button>
+                        <button @click="goToUpdate">Update loan</button>
+                        <button @click="deleteLoan(this.loan.id)">Delete loan</button>
                     </div>
                 </div>
             </div>
@@ -98,7 +98,7 @@ import axios from 'axios'
                 this.$router.push('/loans')
             },
             //makes a request to the API to delete the sample if the user is logged in
-            async deleteSample(sample_id){
+            async deleteLoan(loan_id){
                 if(cacheUtils.get(0) == null){
                     alert('Curator priviledges are required');
                 }else{
@@ -106,12 +106,12 @@ import axios from 'axios'
                         //makes a DELETE request to the API
                         await axios({
                             method: 'delete',
-                            url: 'http://localhost:8080/api/samples/delete/' + sample_id,
+                            url: 'http://localhost:8080/api/loan/delete/' + loan_id,
                             headers: {
                                 'Authorization': 'Bearer ' + cacheUtils.get(0)
                             }
                         })
-                        this.$router.push('/')
+                        this.$router.push('/loans')
                     }catch(error){
                         console.error('Delete Error:', error);
                     }
@@ -124,7 +124,6 @@ import axios from 'axios'
                 }else{
                     this.$router.push('/update-sample/' + this.sample.id);
                 }
-                
             },
             //redirects the user to the login page
             goToLogin(){
@@ -134,7 +133,7 @@ import axios from 'axios'
             logout(){
                 localStorage.clear();
                 alert("Successfully logged out");
-                this.loggedIn = false;
+                this.$router.push('/');
             }
         }   
     }
