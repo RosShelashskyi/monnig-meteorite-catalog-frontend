@@ -128,7 +128,11 @@ import axios from 'axios'
                 this.loggedIn = false;
             },
             goToHistory(sample_id){
-                this.$router.push('/view-sample/' + sample_id + '/history')
+                if(cacheUtils.get(0) == null){
+                    alert('Curator priviledges are required')
+                }else{
+                    this.$router.push('/view-sample/' + sample_id + '/history')
+                }
             }
         }   
     }
