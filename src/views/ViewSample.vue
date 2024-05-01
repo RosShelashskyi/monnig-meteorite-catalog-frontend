@@ -42,6 +42,7 @@
                 <div class="entry">
                     <button @click="goToHome" class="backButton">Back</button>
                     <div>
+                        <button @click="goToHistory(this.sample.id)">Sample history</button>
                         <button @click="goToUpdate">Update sample</button>
                         <button @click="deleteSample(this.sample.id)">Delete sample</button>
                     </div>
@@ -125,6 +126,9 @@ import axios from 'axios'
                 localStorage.clear();
                 alert("Successfully logged out");
                 this.loggedIn = false;
+            },
+            goToHistory(sample_id){
+                this.$router.push()
             }
         }   
     }
