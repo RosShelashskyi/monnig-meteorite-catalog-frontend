@@ -89,6 +89,7 @@ import axios from 'axios'
                     })
                     this.loan = response.data;
                     this.loan = this.loan.data;
+                    this.loan.samples_on_loan = this.loan.samples_on_loan.toString();
                 }catch(error){
                     console.error('Error fetching data:', error);
                 }
