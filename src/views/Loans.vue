@@ -114,6 +114,7 @@ import cacheUtils from '@/utils/cacheUtils';
                 localStorage.clear();
                 alert("Successfully logged out");
                 this.loggedIn = false;
+                this.$router.push('/')
             },
             goToHome(){
                 this.$router.push('/');

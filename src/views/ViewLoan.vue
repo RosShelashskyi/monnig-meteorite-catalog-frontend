@@ -47,7 +47,8 @@
                     <button @click="goToHome" class="backButton">Back</button>
                     <div>
                         <button @click="goToUpdate">Update loan</button>
-                        <button @click="deleteLoan(this.loan.id)">Delete loan</button>
+                        <button v-if="this.loan.isArchived" @click="unarchiveLoan">Unarchive loan</button>
+                        <button v-else @click="archiveLoan">Archive loan</button>
                     </div>
                 </div>
             </div>
@@ -98,25 +99,25 @@ import axios from 'axios'
             goToHome(){
                 this.$router.push('/loans')
             },
-            //makes a request to the API to delete the sample if the user is logged in
-            async deleteLoan(loan_id){
-                if(cacheUtils.get(0) == null){
-                    alert('Curator priviledges are required');
-                }else{
-                    try{
-                        //makes a DELETE request to the API
-                        await axios({
-                            method: 'delete',
-                            url: 'http://localhost:8080/api/loan/delete/' + loan_id,
-                            headers: {
-                                'Authorization': 'Bearer ' + cacheUtils.get(0)
-                            }
-                        })
-                        this.$router.push('/loans')
-                    }catch(error){
-                        console.error('Delete Error:', error);
+            async archiveLoan(){
+                await axios({
+                    method: 'post',
+                    url: 'http://localhost:8080/api/loan/archive/' + this.$route.params.loan_id,
+                    headers: {
+                        'Authorization': 'Bearer ' + cacheUtils.get(0)
                     }
-                }
+                });
+                this.$router.push('/loans')
+            },
+            async unarchiveLoan(){
+                await axios({
+                    method: 'post',
+                    url: 'http://localhost:8080/api/loan/unarchive/' + this.$route.params.loan_id,
+                    headers: {
+                        'Authorization': 'Bearer ' + cacheUtils.get(0)
+                    }
+                });
+                this.$router.push('/loans/archived');
             },
             //redirects the user to the update page if they are logged in
             goToUpdate(){
