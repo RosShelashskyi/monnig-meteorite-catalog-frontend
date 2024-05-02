@@ -15,7 +15,7 @@
                     <div>
                         <button @click="goToAdd" class="add">Add</button>
                         <button @click="goToHome" class="add">View Samples</button>
-                        <button @click="goToArchived" class="add">View Archived Loans</button>
+                        <button @click="goToLoans" class="add">View Loans</button>
                     </div>
                     <form action="" class="searchBar">
                         <input type="text" placeholder="Search" name="q">
@@ -90,7 +90,7 @@ import cacheUtils from '@/utils/cacheUtils';
                     //GET request to the API
                     const response = await axios({
                         method: 'get',
-                        url: 'http://localhost:8080/api/loan/all',
+                        url: 'http://localhost:8080/api/loan/view/all/archived',
                         headers: {
                             'Authorization': 'Bearer ' + cacheUtils.get(0)
                         }
@@ -114,13 +114,12 @@ import cacheUtils from '@/utils/cacheUtils';
                 localStorage.clear();
                 alert("Successfully logged out");
                 this.loggedIn = false;
-                this.$router.push('/')
             },
             goToHome(){
                 this.$router.push('/');
             },
-            goToArchived(){
-                this.$router.push('/loans/archived');
+            goToLoans(){
+                this.$router.push('/loans');
             }
         }      
     }
