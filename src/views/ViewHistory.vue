@@ -10,41 +10,23 @@
         </div>
         <div class="bottom">
             <div class="contentWindow"> 
-                <div class="details">Sample details:</div>
+                <div class="details">History entry details:</div>
                 <div class="entry">
-                    <div>Name:</div>
-                    <div>{{sample.name}}</div>
+                    <div>Date</div>
+                    <div>{{historyEntry.date}}</div>
                 </div>
                 <div class="entry">
-                    <div>Monnig number: </div>
-                    <div>{{sample.monnig_number}}</div>
+                    <div>Category</div>
+                    <div>{{historyEntry.category}}</div>
                 </div>
                 <div class="entry">
-                    <div>Country</div>
-                    <div>{{sample.country}}</div>
+                    <div>Notes</div>
+                    <div>{{historyEntry.notes}}</div>
                 </div>
                 <div class="entry">
-                    <div>Class</div>
-                    <div>{{sample.sample_class}}</div>
-                </div>
-                <div class="entry">
-                    <div>Group</div>
-                    <div>{{sample.group}}</div>
-                </div>
-                <div class="entry">
-                    <div>Year found</div>
-                    <div>{{sample.date_found_year}}</div>
-                </div>
-                <div class="entry">
-                    <div>Sample weight (g)</div>
-                    <div>{{sample.sample_weight_g}}</div>
-                </div>
-                <div class="entry">
-                    <button @click="goToHome" class="backButton">Back</button>
+                    <button @click="goToHistory" class="backButton">Back</button>
                     <div>
-                        <button @click="goToHistory(this.sample.id)">Sample history</button>
-                        <button @click="goToUpdate">Update sample</button>
-                        <button @click="deleteSample(this.sample.id)">Delete sample</button>
+                        <button @click="deleteEntry()">Delete history entry</button>
                     </div>
                 </div>
             </div>
@@ -59,12 +41,12 @@ import axios from 'axios'
     export default {
         data(){
             return{
-                sample: '',     //stores sample data
+                historyEntry: '',     //stores sample data
                 loggedIn: ''    //stores login state
             }
         },
         mounted() {
-            this.fetchData(this.$route.params.sample_id);   //fetches samples from API
+            this.fetchData(this.$route.params.entry_id);   //fetches samples from API
             //prints a login or a logout button depending on the login state
             if(cacheUtils.get(0) != null){
                 this.loggedIn = true;
@@ -74,48 +56,41 @@ import axios from 'axios'
         },
         methods:{
             //fetches data from the API
-            async fetchData(sample_id){
+            async fetchData(entry_id){
                 try{
                     //GET request to the API
-                    const response = await axios.get('http://localhost:8080/api/samples/view/' + sample_id);
-                    this.sample = response.data;
-                    this.sample = this.sample.data;
+                    const response = await axios({
+                        method: 'get',
+                        url: 'http://localhost:8080/api/history/' + entry_id,
+                        headers :{
+                            'Authorization': 'Bearer ' + cacheUtils.get(0)
+                        }
+                    })
+                    this.historyEntry = response.data;
+                    this.historyEntry = this.historyEntry.data;
                 }catch(error){
                     console.error('Error fetching data:', error);
                 }
             },
             //redirects the user to the main menu
-            goToHome(){
-                this.$router.push('/')
+            goToHistory(){
+                this.$router.push('/view-sample/' + this.$route.params.sample_id + '/history')
             },
             //makes a request to the API to delete the sample if the user is logged in
-            async deleteSample(sample_id){
-                if(cacheUtils.get(0) == null){
-                    alert('Curator priviledges are required');
-                }else{
-                    try{
-                        //makes a DELETE request to the API
-                        await axios({
-                            method: 'delete',
-                            url: 'http://localhost:8080/api/samples/delete/' + sample_id,
-                            headers: {
-                                'Authorization': 'Bearer ' + cacheUtils.get(0)
-                            }
-                        })
-                        this.$router.push('/')
-                    }catch(error){
-                        console.error('Delete Error:', error);
-                    }
+            async deleteEntry(){
+                try{
+                    //makes a DELETE request to the API
+                    await axios({
+                        method: 'delete',
+                        url: 'http://localhost:8080/api/history/delete/' + this.$route.params.entry_id,
+                        headers: {
+                            'Authorization': 'Bearer ' + cacheUtils.get(0)
+                        }
+                    })
+                    this.$router.push('/view-sample/' + this.$route.params.sample_id + '/history')
+                }catch(error){
+                    console.error('Delete Error:', error);
                 }
-            },
-            //redirects the user to the update page if they are logged in
-            goToUpdate(){
-                if(cacheUtils.get(0) == null){
-                    alert('Curator priviledges are required');
-                }else{
-                    this.$router.push('/update-sample/' + this.sample.id);
-                }
-                
             },
             //redirects the user to the login page
             goToLogin(){
@@ -125,14 +100,7 @@ import axios from 'axios'
             logout(){
                 localStorage.clear();
                 alert("Successfully logged out");
-                this.loggedIn = false;
-            },
-            goToHistory(sample_id){
-                if(cacheUtils.get(0) == null){
-                    alert('Curator priviledges are required')
-                }else{
-                    this.$router.push('/view-sample/' + sample_id + '/history')
-                }
+                this.$router.push('/');
             }
         }   
     }
