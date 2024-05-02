@@ -11,6 +11,7 @@ import AddLoan from '@/views/AddLoan.vue'
 import UpdateLoan from '@/views/UpdateLoan.vue'
 import SampleHistory from '@/views/SampleHistory.vue';
 import ViewHistory from '@/views/ViewHistory.vue'
+import AddHistory from '@/views/AddHistory.vue';
 
 const router = createRouter({
     history: createMemoryHistory(),
@@ -25,7 +26,8 @@ const router = createRouter({
         {path: '/loans/add', name:'AddLoan', component: AddLoan},
         {path: '/loans/update/:loan_id', name: 'UpdateLoan', component: UpdateLoan},
         {path: '/view-sample/:sample_id/history', name: 'SampleHistory', component: SampleHistory},
-        {path: '/view-sample/:sample_id/history/:entry_id', name: 'ViewHistory', component: ViewHistory}
+        {path: '/view-sample/:sample_id/history/:entry_id', name: 'ViewHistory', component: ViewHistory},
+        {path: '/view-sample/:sample_id/history/add', name: 'AddHistory', component: AddHistory}
     ]
 });
 
