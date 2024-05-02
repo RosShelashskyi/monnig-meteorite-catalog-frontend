@@ -14,7 +14,7 @@
                 <div class="buttons">
                     <div>
                         <button @click="goToAdd" class="add">Add</button>
-                        <button @click="goToLoans" class="add">View Loans</button>
+                        <button @click="goToSample" class="add">Back</button>
                     </div>
                     <form action="" class="searchBar">
                         <input type="text" placeholder="Search" name="q">
@@ -92,8 +92,11 @@ import cacheUtils from '@/utils/cacheUtils';
                 }
             },
             //redirects the user to the sample view page
-            goToView(sample_id){
-                this.$router.push('/view-sample/' + sample_id);
+            goToView(entry_id){
+                this.$router.push('/view-sample/' + this.$route.params.sample_id + '/history/' + entry_id);
+            },
+            goToSample(){
+               this.$router.push('/view-sample/' + this.$route.params.sample_id); 
             },
             //redirects the user to the login page
             goToLogin(){
@@ -103,14 +106,7 @@ import cacheUtils from '@/utils/cacheUtils';
             logout(){
                 localStorage.clear();
                 alert("Successfully logged out");
-                this.loggedIn = false;
-            },
-            goToLoans(){
-                if(cacheUtils.get(0) == null){
-                    alert('Curator priviledges are required');
-                }else{
-                    this.$router.push('/loans');
-                }
+                this.$router.push('/');
             }
         }      
     }
