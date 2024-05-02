@@ -26,7 +26,7 @@
                 <div class="entry">
                     <button @click="goToHistory" class="backButton">Back</button>
                     <div>
-                        <button @click="deleteLoan(this.loan.id)">Delete history entry</button>
+                        <button @click="deleteEntry()">Delete history entry</button>
                     </div>
                 </div>
             </div>
@@ -77,23 +77,19 @@ import axios from 'axios'
                 this.$router.push('/view-sample/' + this.$route.params.sample_id + '/history')
             },
             //makes a request to the API to delete the sample if the user is logged in
-            async deleteLoan(loan_id){
-                if(cacheUtils.get(0) == null){
-                    alert('Curator priviledges are required');
-                }else{
-                    try{
-                        //makes a DELETE request to the API
-                        await axios({
-                            method: 'delete',
-                            url: 'http://localhost:8080/api/loan/delete/' + loan_id,
-                            headers: {
-                                'Authorization': 'Bearer ' + cacheUtils.get(0)
-                            }
-                        })
-                        this.$router.push('/loans')
-                    }catch(error){
-                        console.error('Delete Error:', error);
-                    }
+            async deleteEntry(){
+                try{
+                    //makes a DELETE request to the API
+                    await axios({
+                        method: 'delete',
+                        url: 'http://localhost:8080/api/history/delete/' + this.$route.params.entry_id,
+                        headers: {
+                            'Authorization': 'Bearer ' + cacheUtils.get(0)
+                        }
+                    })
+                    this.$router.push('/view-sample/' + this.$route.params.sample_id + '/history')
+                }catch(error){
+                    console.error('Delete Error:', error);
                 }
             },
             //redirects the user to the login page
