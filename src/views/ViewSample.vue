@@ -77,7 +77,7 @@ import axios from 'axios'
             async fetchData(sample_id){
                 try{
                     //GET request to the API
-                    const response = await axios.get('http://localhost:8080/api/samples/view/' + sample_id);
+                    const response = await axios.get(import.meta.env.VITE_API_ENDPOINT + '/samples/view/' + sample_id);
                     this.sample = response.data;
                     this.sample = this.sample.data;
                 }catch(error){
@@ -97,7 +97,7 @@ import axios from 'axios'
                         //makes a DELETE request to the API
                         await axios({
                             method: 'delete',
-                            url: 'http://localhost:8080/api/samples/delete/' + sample_id,
+                            url: import.meta.env.VITE_API_ENDPOINT + '/samples/delete/' + sample_id,
                             headers: {
                                 'Authorization': 'Bearer ' + cacheUtils.get(0)
                             }

@@ -61,7 +61,7 @@ import axios from 'axios'
                     //GET request to the API
                     const response = await axios({
                         method: 'get',
-                        url: 'http://localhost:8080/api/history/' + entry_id,
+                        url: import.meta.env.VITE_API_ENDPOINT + '/history/' + entry_id,
                         headers :{
                             'Authorization': 'Bearer ' + cacheUtils.get(0)
                         }
@@ -82,7 +82,7 @@ import axios from 'axios'
                     //makes a DELETE request to the API
                     await axios({
                         method: 'delete',
-                        url: 'http://localhost:8080/api/history/delete/' + this.$route.params.entry_id,
+                        url: import.meta.env.VITE_API_ENDPOINT + '/history/delete/' + this.$route.params.entry_id,
                         headers: {
                             'Authorization': 'Bearer ' + cacheUtils.get(0)
                         }

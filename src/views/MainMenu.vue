@@ -93,7 +93,7 @@ import cacheUtils from '@/utils/cacheUtils';
             async fetchData(){
                 try{
                     //GET request to the API
-                    const response = await axios.get('http://localhost:8080/api/samples/view/all');
+                    const response = await axios.get(import.meta.env.VITE_API_ENDPOINT + '/samples/view/all');
                     this.samples = response.data;
                     this.samples = this.samples.data;
                 }catch(error){
