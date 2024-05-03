@@ -70,7 +70,7 @@ import axios from 'axios';
                 this.loanData.samples_on_loan = temp.split(',')
                 try{
                     //makes a POST request to the API
-                    const request = await axios.post('http://localhost:8080/api/loan/create', {
+                    const request = await axios.post(import.meta.env.VITE_API_ENDPOINT + '/loan/create', {
                         //request body
                         loanee_name: this.loanData.loanee_name,
                         loanee_email: this.loanData.loanee_email,

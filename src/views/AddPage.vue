@@ -64,7 +64,7 @@ import axios from 'axios';
             async addSample(){
                 try{
                     //makes a POST request to the API
-                    const request = await axios.post('http://localhost:8080/api/samples/add', {
+                    const request = await axios.post(import.meta.env.VITE_API_ENDPOINT + '/samples/add', {
                         //request body
                         "name": this.sampleData.name,
                         "monnig_number": this.sampleData.monnig_number,

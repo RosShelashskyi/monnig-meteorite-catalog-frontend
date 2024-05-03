@@ -90,7 +90,7 @@ import cacheUtils from '@/utils/cacheUtils';
                     //GET request to the API
                     const response = await axios({
                         method: 'get',
-                        url: 'http://localhost:8080/api/loan/all',
+                        url: import.meta.env.VITE_API_ENDPOINT + '/loan/all',
                         headers: {
                             'Authorization': 'Bearer ' + cacheUtils.get(0)
                         }

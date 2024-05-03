@@ -59,7 +59,7 @@ import cacheUtils from '@/utils/cacheUtils';
             async fetchData(sample_id){
                 try{
                     //GET request to the API
-                    const response = await axios.get('http://localhost:8080/api/samples/view/' + sample_id);
+                    const response = await axios.get(import.meta.env.VITE_API_ENDPOINT + '/samples/view/' + sample_id);
                     this.sample = response.data;
                     this.sample = this.sample.data;
                 }catch(error){
@@ -70,7 +70,7 @@ import cacheUtils from '@/utils/cacheUtils';
             async updateSample(){
                 try{
                     //makes a PUT request to the API
-                    const request = await axios.put('http://localhost:8080/api/samples/update/' + this.$route.params.sample_id, {
+                    const request = await axios.put(import.meta.env.VITE_API_ENDPOINT + '/samples/update/' + this.$route.params.sample_id, {
                         //request body
                         name: this.sample.name,
                         monnig_number: this.sample.monnig_number,

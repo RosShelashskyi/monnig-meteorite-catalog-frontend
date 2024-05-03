@@ -63,7 +63,7 @@ import axios from 'axios';
                     //GET request to the API
                     const response = await axios({
                         method: 'get',
-                        url: 'http://localhost:8080/api/loan/view/' + loan_id,
+                        url: import.meta.env.VITE_API_ENDPOINT + '/loan/view/' + loan_id,
                         headers :{
                             'Authorization': 'Bearer ' + cacheUtils.get(0)
                         }
@@ -82,7 +82,7 @@ import axios from 'axios';
                 this.loanData.samples_on_loan = temp.split(',')
                 try{
                     //makes a PUT request to the API
-                    await axios.put('http://localhost:8080/api/loan/update/' + this.$route.params.loan_id, {
+                    await axios.put(import.meta.env.VITE_API_ENDPOINT + '/loan/update/' + this.$route.params.loan_id, {
                         //request body
                         loanee_name: this.loanData.loanee_name,
                         loanee_email: this.loanData.loanee_email,
