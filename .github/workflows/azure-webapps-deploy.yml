@@ -1,0 +1,36 @@
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: 'read'
+  packages: 'write'
+
+env:
+  AZURE_WEBAPP_NAME: "monnig-meteorite-catalog-frontend"
+  AZURE_WEBAPP_PACKAGE_PATH: "dist"
+  NODE_VERSION: "20.x"
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Use API URL secret
+        run: echo "API_URL=${{ secrets.API_URL_SECRET }}" >> .env
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build
+      - name: "Deploy to Azure WebApp"
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.PORTAL_PUBLISH_PROFILE }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}

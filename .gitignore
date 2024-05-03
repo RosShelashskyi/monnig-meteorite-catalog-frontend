@@ -33,3 +33,4 @@ coverage
 README.md
 src/views/*.html
 src/monnig.sql
+dockerfile
