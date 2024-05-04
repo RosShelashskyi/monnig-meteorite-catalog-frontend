@@ -28,6 +28,7 @@ name: Build and deploy a container to an Azure Web App
 
 env:
   AZURE_WEBAPP_NAME: monnig-meteorite-catalog-frontent # set this to the name of your Azure Web App
+  API_URL: ${{secrets.API_URL}}
 
 on:
   push:
@@ -43,8 +44,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Use API URL secret
-        run: echo "API_URL=${{ secrets.API_URL }}" >> .env
+      # - name: Use API URL secret
+      #   run: echo "API_URL=${{ secrets.API_URL }}" >> .env
 
       - uses: actions/checkout@v4
 
