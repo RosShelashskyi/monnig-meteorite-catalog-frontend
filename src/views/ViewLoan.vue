@@ -83,7 +83,7 @@ import axios from 'axios'
                     //GET request to the API
                     const response = await axios({
                         method: 'get',
-                        url: import.meta.env.VITE_API_ENDPOINT + '/loan/view/' + loan_id,
+                        url: 'https://monnig-meteorite-catalog.azurewebapps.net/api/loan/view/' + loan_id,
                         headers :{
                             'Authorization': 'Bearer ' + cacheUtils.get(0)
                         }
@@ -102,7 +102,7 @@ import axios from 'axios'
             async archiveLoan(){
                 await axios({
                     method: 'post',
-                    url: import.meta.env.VITE_API_ENDPOINT + '/loan/archive/' + this.$route.params.loan_id,
+                    url: 'https://monnig-meteorite-catalog.azurewebapps.net/api/loan/archive/' + this.$route.params.loan_id,
                     headers: {
                         'Authorization': 'Bearer ' + cacheUtils.get(0)
                     }
@@ -112,7 +112,7 @@ import axios from 'axios'
             async unarchiveLoan(){
                 await axios({
                     method: 'post',
-                    url: import.meta.env.VITE_API_ENDPOINT + '/loan/unarchive/' + this.$route.params.loan_id,
+                    url: 'https://monnig-meteorite-catalog.azurewebapps.net/api/loan/unarchive/' + this.$route.params.loan_id,
                     headers: {
                         'Authorization': 'Bearer ' + cacheUtils.get(0)
                     }

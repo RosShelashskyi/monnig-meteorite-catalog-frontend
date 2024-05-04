@@ -90,7 +90,7 @@ import cacheUtils from '@/utils/cacheUtils';
                     //GET request to the API
                     const response = await axios({
                         method: 'get',
-                        url: import.meta.env.VITE_API_ENDPOINT + '/loan/view/all/archived',
+                        url: 'https://monnig-meteorite-catalog.azurewebapps.net/api/loan/view/all/archived',
                         headers: {
                             'Authorization': 'Bearer ' + cacheUtils.get(0)
                         }
