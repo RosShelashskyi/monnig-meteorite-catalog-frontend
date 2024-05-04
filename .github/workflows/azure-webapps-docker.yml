@@ -44,7 +44,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      name: Use API URL secret
+      - name: Use API URL secret
         run: echo "API_URL=${{ secrets.API_URL_SECRET }}" >> .env
 
       - name: Set up Docker Buildx
