@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Use API URL secret
+      - name: Use API URL secret
         run: echo "API_URL=${{ secrets.API_URL }}" >> .env
 
       - uses: actions/checkout@v4
