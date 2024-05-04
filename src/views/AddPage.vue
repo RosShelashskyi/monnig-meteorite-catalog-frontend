@@ -64,7 +64,7 @@ import axios from 'axios';
             async addSample(){
                 try{
                     //makes a POST request to the API
-                    const request = await axios.post('https://monnig-meteorite-catalog.azurewebapps.net/api/samples/add', {
+                    const request = await axios.post('https://monnig-meteorite-catalog.azurewebsites.net/api/samples/add', {
                         //request body
                         "name": this.sampleData.name,
                         "monnig_number": this.sampleData.monnig_number,

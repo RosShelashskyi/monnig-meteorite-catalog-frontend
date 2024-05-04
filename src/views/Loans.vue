@@ -90,7 +90,7 @@ import cacheUtils from '@/utils/cacheUtils';
                     //GET request to the API
                     const response = await axios({
                         method: 'get',
-                        url: 'https://monnig-meteorite-catalog.azurewebapps.net/api/loan/all',
+                        url: 'https://monnig-meteorite-catalog.azurewebsites.net/api/loan/all',
                         headers: {
                             'Authorization': 'Bearer ' + cacheUtils.get(0)
                         }

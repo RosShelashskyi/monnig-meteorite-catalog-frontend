@@ -48,7 +48,7 @@ import axios from 'axios';
             async addEntry(){
                 try{
                     //makes a POST request to the API
-                    await axios.post('https://monnig-meteorite-catalog.azurewebapps.net/api/samples/history/add/' + this.$route.params.sample_id, {
+                    await axios.post('https://monnig-meteorite-catalog.azurewebsites.net/api/samples/history/add/' + this.$route.params.sample_id, {
                         //request body
                         date: this.entryData.date,
                         category: this.entryData.category,

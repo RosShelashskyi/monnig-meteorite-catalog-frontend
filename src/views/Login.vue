@@ -41,7 +41,7 @@ import cacheUtils from '@/utils/cacheUtils';
                     //base64-encodes username and password with for Basic Authorization
                     let info = btoa(this.username + ':' + this.password)
                     //makes a POST request to the API
-                    let token = await axios.post('https://monnig-meteorite-catalog.azurewebapps.net/api/users/login', null, {
+                    let token = await axios.post('https://monnig-meteorite-catalog.azurewebsites.net/api/users/login', null, {
                         headers: {
                             //Authorization header with encoded username and password
                             'Authorization': 'Basic ' + info

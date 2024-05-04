@@ -93,7 +93,7 @@ import cacheUtils from '@/utils/cacheUtils';
             async fetchData(){
                 try{
                     //GET request to the API
-                    const response = await axios.get('https://monnig-meteorite-catalog.azurewebapps.net/api/samples/view/all');
+                    const response = await axios.get('https://monnig-meteorite-catalog.azurewebsites.net/api/samples/view/all');
                     this.samples = response.data;
                     this.samples = this.samples.data;
                 }catch(error){

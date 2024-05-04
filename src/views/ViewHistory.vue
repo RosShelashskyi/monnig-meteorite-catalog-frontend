@@ -61,7 +61,7 @@ import axios from 'axios'
                     //GET request to the API
                     const response = await axios({
                         method: 'get',
-                        url: 'https://monnig-meteorite-catalog.azurewebapps.net/api/history/' + entry_id,
+                        url: 'https://monnig-meteorite-catalog.azurewebsites.net/api/history/' + entry_id,
                         headers :{
                             'Authorization': 'Bearer ' + cacheUtils.get(0)
                         }
@@ -82,7 +82,7 @@ import axios from 'axios'
                     //makes a DELETE request to the API
                     await axios({
                         method: 'delete',
-                        url: 'https://monnig-meteorite-catalog.azurewebapps.net/api/history/delete/' + this.$route.params.entry_id,
+                        url: 'https://monnig-meteorite-catalog.azurewebsites.net/api/history/delete/' + this.$route.params.entry_id,
                         headers: {
                             'Authorization': 'Bearer ' + cacheUtils.get(0)
                         }
