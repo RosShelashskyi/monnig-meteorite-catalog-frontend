@@ -27,7 +27,7 @@
 name: Build and deploy a container to an Azure Web App
 
 env:
-  API_URL: ${{secrets.API_URL}}
+  VITE_API_ENDPOINT: ${{secrets.API_URL}}
   AZURE_WEBAPP_NAME: monnig-meteorite-catalog-frontent # set this to the name of your Azure Web App
 
 on:
